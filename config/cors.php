@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['*', '*.mkthemedattractions.com.ph'],
 
     'allowed_origins_patterns' => [],
 

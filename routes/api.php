@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\ApiTokenController;
-Route::match(['put', 'get', 'post'], '/current',  [App\Http\Controllers\webAdmin\z_routes::class, 'current']);
+Route::match(['put', 'get', 'post'], '/current-test',  [App\Http\Controllers\webAdmin\z_routes::class, 'current']);
 
 use App\Http\Controllers\AuthenticationController;
 Route::match(['put', 'get', 'post'], '/login',  [AuthenticationController::class, 'UserLogIn']);

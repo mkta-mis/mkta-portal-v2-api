@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\ApiTokenController;
-Route::match(['put', 'get', 'post'], '/current-test',  [App\Http\Controllers\webAdmin\z_routes::class, 'current']);
+Route::middleware('custom.cors')->match(['put', 'get', 'post'], '/current-test',  [App\Http\Controllers\webAdmin\z_routes::class, 'current']);
 
 use App\Http\Controllers\AuthenticationController;
-Route::match(['put', 'get', 'post'], '/login',  [AuthenticationController::class, 'UserLogIn']);
+Route::middleware('custom.cors')->match(['put', 'get', 'post'], '/login',  [AuthenticationController::class, 'UserLogIn']);
 
-Route::prefix('/categories')->group(function () {
+Route::middleware('custom.cors')->prefix('/categories')->group(function () {
     Route::prefix('/web-admin')->group(function () {
         Route::match(['put', 'get', 'post'], '/list', [App\Http\Controllers\webAdmin\z_routes::class, 'webAdmin_Category']);
         Route::match(['put', 'get', 'post'], '/action', [App\Http\Controllers\webAdmin\z_routes::class, 'webAdmin_Category_Change']);
@@ -28,7 +28,7 @@ Route::prefix('/categories')->group(function () {
     Route::match(['put', 'get', 'post'], '{cat_urlKey}', [App\Http\Controllers\webStore\routes::class, 'webStore_Category']);
     Route::match(['put', 'get', 'post'], 'products/{cat_urlKey}', [App\Http\Controllers\webStore\routes::class, 'webStore_Category_Products']);
 });
-Route::prefix('/users')->group(function () {
+Route::middleware('custom.cors')->prefix('/users')->group(function () {
     Route::prefix('/web-admin')->group(function () {
         Route::match(['put', 'get', 'post'], '/list', [App\Http\Controllers\webAdmin\z_routes::class, 'webAdmin_Users_get']);
         Route::match(['put', 'get', 'post'], '/register', [App\Http\Controllers\webAdmin\z_routes::class, 'webAdmin_Users_Registration']);
@@ -37,7 +37,7 @@ Route::prefix('/users')->group(function () {
     });
 });
 
-Route::prefix('/customers')->group(function () {
+Route::middleware('custom.cors')->prefix('/customers')->group(function () {
 
     Route::match(['put', 'get', 'post'], 'token/{token}', [App\Http\Controllers\webAdmin\z_routes::class, 'webAdmin_Customers_getData']);
 
@@ -51,7 +51,7 @@ Route::prefix('/customers')->group(function () {
     });
 });
 
-Route::prefix('/products')->group(function () {
+Route::middleware('custom.cors')->prefix('/products')->group(function () {
     Route::match(['put', 'get', 'post'], 'list', [App\Http\Controllers\webStore\routes::class, 'webStore_Product_List']);
     
     Route::match(['put', 'get', 'post'], 'thumbnail/update', [App\Http\Controllers\webAdmin\z_routes::class, 'webStore_Product_Thumbnail_update']);
@@ -85,12 +85,12 @@ Route::prefix('/products')->group(function () {
     Route::match(['put', 'get', 'post'], 'update/{code}', [App\Http\Controllers\webStore\routes::class, 'webStore_Product_Index']);
 });
 
-Route::prefix('/files')->group(function () {
+Route::middleware('custom.cors')->prefix('/files')->group(function () {
     Route::match(['put', 'get', 'post'], 'search', [App\Http\Controllers\ctrl_Files::class, 'files_search']);
     Route::match(['put', 'get', 'post'], 'upload', [App\Http\Controllers\ctrl_Files::class, 'files_upload']);
 });
 
-Route::prefix('/roles')->group(function () {
+Route::middleware('custom.cors')->prefix('/roles')->group(function () {
     Route::match(['put', 'get', 'post'], 'get', [App\Http\Controllers\webAdmin\z_routes::class, 'db_Roles']);
 
     Route::prefix('/web-admin')->group(function () {
@@ -99,7 +99,7 @@ Route::prefix('/roles')->group(function () {
     });
     
 });
-Route::prefix('/permissions')->group(function () {
+Route::middleware('custom.cors')->prefix('/permissions')->group(function () {
     Route::prefix('/web-admin')->group(function () {
         Route::match(['put', 'get', 'post'], '/get', [App\Http\Controllers\webAdmin\z_routes::class, 'webAdmin_Permissions_get']);
         Route::match(['put', 'get', 'post'], '/action', [App\Http\Controllers\webAdmin\z_routes::class, 'webAdmin_Permissions_Change']);
